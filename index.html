@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sebuah Pesan Untukmu ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at top, #ffb6c9 0%, transparent 35%),
+                linear-gradient(135deg, #170b19, #35152d, #160b20);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Background hearts */
+        .hearts span {
+            position: fixed;
+            bottom: -50px;
+            color: rgba(255, 150, 190, 0.65);
+            font-size: 20px;
+            animation: naik 8s linear infinite;
+            z-index: 0;
+        }
+
+        .hearts span:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .hearts span:nth-child(2) { left: 25%; animation-delay: 2s; font-size: 30px; }
+        .hearts span:nth-child(3) { left: 40%; animation-delay: 4s; }
+        .hearts span:nth-child(4) { left: 60%; animation-delay: 1s; font-size: 28px; }
+        .hearts span:nth-child(5) { left: 75%; animation-delay: 3s; }
+        .hearts span:nth-child(6) { left: 90%; animation-delay: 5s; font-size: 25px; }
+
+        @keyframes naik {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 650px;
+            padding: 45px 35px;
+            text-align: center;
+
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 30px;
+
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.4),
+                inset 0 0 30px rgba(255, 255, 255, 0.03);
+
+            animation: muncul 1.5s ease;
+        }
+
+        @keyframes muncul {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .heart {
+            font-size: 55px;
+            animation: detak 1.5s infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes detak {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.18);
+            }
+        }
+
+        .small-title {
+            color: #ffb5ca;
+            letter-spacing: 4px;
+            font-size: 13px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 42px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .name {
+            color: #ffabc4;
+        }
+
+        .typing {
+            min-height: 50px;
+            font-size: 18px;
+            line-height: 1.7;
+            color: #f8dfe8;
+            margin-bottom: 30px;
+        }
+
+        .divider {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(
+                to right,
+                transparent,
+                #ff9fbd,
+                transparent
+            );
+            margin: 25px auto;
+        }
+
+        .message {
+            text-align: left;
+            font-size: 16px;
+            line-height: 1.9;
+            color: #f5e9ee;
+        }
+
+        .message p {
+            margin-bottom: 18px;
+        }
+
+        .highlight {
+            color: #ffb4ca;
+            font-weight: bold;
+        }
+
+        .quote {
+            margin: 30px 0;
+            padding: 20px;
+            border-left: 3px solid #ff8fb0;
+            background: rgba(255, 150, 180, 0.08);
+            border-radius: 0 15px 15px 0;
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-size: 18px;
+            color: #ffdce7;
+        }
+
+        button {
+            margin-top: 15px;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 50px;
+
+            background: linear-gradient(135deg, #ff719d, #d94678);
+            color: white;
+
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+
+            box-shadow: 0 8px 25px rgba(255, 80, 130, 0.3);
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 80, 130, 0.5);
+        }
+
+        #secret {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            color: #ffd5e1;
+            animation: muncul 0.8s ease;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.55);
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                padding: 35px 22px;
+                border-radius: 25px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .typing {
+                font-size: 16px;
+            }
+
+            .message {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Hati yang melayang -->
+    <div class="hearts">
+        <span>❤</span>
+        <span>♡</span>
+        <span>❤</span>
+        <span>♡</span>
+        <span>❤</span>
+        <span>♡</span>
+    </div>
+
+    <div class="container">
+
+        <div class="card">
+
+            <div class="heart">❤️</div>
+
+            <div class="small-title">
+                Sebuah pesan kecil
+            </div>
+
+            <h1>
+                Untuk <span class="name">Lala Prodi Hukum</span>
+            </h1>
+
+            <div class="typing" id="typing"></div>
+
+            <div class="divider"></div>
+
+            <div class="message">
+
+                <p>
+                    Hai...
+                    Mungkin kita memang baru saling mengenal,
+                    dan mungkin juga belum banyak cerita yang kita bagi.
+                    Tapi entah kenapa, ada sesuatu dari perkenalan ini
+                    yang terasa cukup <span class="highlight">istimewa</span>.
+                </p>
+
+                <p>
+                    Aku nggak tahu akan menjadi seperti apa cerita
+                    kita nantinya. Bisa jadi hanya sebatas teman,
+                    bisa juga menjadi seseorang yang lebih dekat.
+                    Aku tidak ingin terburu-buru menentukan akhirnya.
+                </p>
+
+                <p>
+                    Aku hanya ingin menikmati setiap percakapan,
+                    setiap candaan, dan setiap momen kecil yang kita punya.
+                    Karena terkadang, sesuatu yang indah justru
+                    dimulai dari hal yang sederhana:
+                    <span class="highlight">sebuah perkenalan.</span>
+                </p>
+
+                <div class="quote">
+                    "Aku tidak berharap kita langsung menjadi
+                    cerita yang sempurna. Aku hanya berharap,
+                    kalau memang kita ditakdirkan untuk saling mengenal,
+                    semoga kita tidak berhenti hanya di kata 'kenal'."
+                </div>
+
+                <p>
+                    Jadi, kalau suatu hari nanti kamu bertanya
+                    apa yang aku pikirkan saat pertama kali mengenalmu,
+                    mungkin jawabanku sederhana:
+                </p>
+
+                <p style="text-align:center; font-family:Georgia,serif; font-size:21px;">
+                    <span class="highlight">
+                        "Aku senang pernah bertemu denganmu." ❤️
+                    </span>
+                </p>
+
+            </div>
+
+            <button onclick="showSecret()">
+                Ada satu hal lagi... 💌
+            </button>
+
+            <div id="secret">
+                <p>
+                    Aku nggak tahu apakah pesan ini akan membuatmu
+                    tersenyum atau justru membuatmu sedikit malu.
+                    Tapi setidaknya sekarang kamu tahu...
+                </p>
+
+                <br>
+
+                <p style="font-family:Georgia,serif; font-size:20px;">
+                    Aku ingin mengenalmu lebih jauh. 🌹
+                </p>
+
+                <br>
+
+                <p>
+                    Pelan-pelan saja. Tidak perlu dipaksakan.
+                    Karena menurutku, sesuatu yang baik
+                    memang pantas untuk dinikmati prosesnya.
+                </p>
+            </div>
+
+            <div class="footer">
+                Dibuat dengan sedikit keberanian dan banyak ketulusan ❤️
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+
+        /* Efek mengetik */
+        const text =
+            "Kadang, seseorang datang tanpa direncanakan... lalu perlahan membuat kita ingin mengenalnya lebih jauh.";
+
+        let index = 0;
+        const typing = document.getElementById("typing");
+
+        function typeWriter() {
+            if (index < text.length) {
+                typing.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 45);
+            }
+        }
+
+        typeWriter();
+
+
+        /* Tombol pesan rahasia */
+        function showSecret() {
+            const secret = document.getElementById("secret");
+
+            if (secret.style.display === "block") {
+                secret.style.display = "none";
+            } else {
+                secret.style.display = "block";
+            }
+        }
+
+    </script>
+
+</body>
+</html>
